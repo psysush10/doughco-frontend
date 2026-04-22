@@ -1,16 +1,83 @@
-# React + Vite
+# DoughCo Frontend 🍪
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A product-focused React application simulating an online cookie dough store, built to demonstrate modern frontend architecture, state management, and user-centric design.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Features
 
-## React Compiler
+* 🛒 Add to Cart with quantity management
+* 🌐 Global state management using Context API
+* 💾 Cart persistence using localStorage
+* 🔍 Real-time search & filtering
+* ⚡ Async data loading simulation
+* ❌ Error handling with retry mechanism
+* 🎨 Smooth UI interactions & micro-animations
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🧠 Tech & Concepts Used
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* React (Functional Components, Hooks)
+* Context API (Global State Management)
+* Custom Hooks (`useCart`)
+* React Router (Dynamic Routing)
+* Tailwind CSS (Styling & UI)
+* LocalStorage (State Persistence)
+
+---
+
+## 🏗️ Architecture
+
+* `useCart` → Handles business logic (cart operations)
+* `CartContext` → Distributes global state
+* Components → UI rendering
+* Pages → Route-based structure
+
+---
+
+## 🔄 App Flow
+
+1. User browses products on Home page
+2. Clicks a product → navigates to detail page
+3. Adds items to cart
+4. Cart updates globally via Context API
+5. Data persists via localStorage
+
+---
+
+## ⚙️ Key Engineering Decisions
+
+* Used Context API to avoid prop drilling and scale state management
+* Extracted cart logic into a reusable custom hook
+* Implemented loading, error, and retry states for realistic async behavior
+* Focused on clean component architecture and separation of concerns
+
+---
+
+## 📸 Screenshots
+
+![Home](./screenshots/home.png)
+![Product](./screenshots/product.png)
+![Cart](./screenshots/cart.png)
+
+---
+
+## ▶️ Getting Started
+
+```bash
+npm install
+npm run dev
+```
+
+---
+
+## 🎯 Why this project
+
+Built to transition into frontend/product engineering roles by demonstrating:
+
+* Real-world state management
+* UX-focused feature development
+* Clean and scalable React architecture
+
+---
