@@ -17,7 +17,7 @@ function ProductDetail(){
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const res = await fetch(`${API_BASE}/api/orders`)
+                const res = await fetch(`${API_BASE}/api/products`)
 
                 if (!res.ok) {
                     throw new Error("Failed to fetch product")
