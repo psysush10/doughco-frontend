@@ -41,8 +41,13 @@ function CartDrawer({isOpen, onClose}){
             console.log("Order response:", data);
 
             // ❌ FAILURE PATH
-            if (!res.ok) {
+            if (!res.ok || !data) {
                 alert(data?.message|| "Cart is empty");
+                return;
+            }
+
+            if(!data){
+                alert("Cart is empty.")
                 return;
             }
 
