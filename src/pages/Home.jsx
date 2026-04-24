@@ -24,7 +24,7 @@ function Home() {
         console.log("Calling Get Products API...")
         const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
-        const res = await fetch('`${API_BASE}/api/products`')
+        const res = await fetch(`${API_BASE}/api/products`)
         
         console.log("Response:", res)
         
