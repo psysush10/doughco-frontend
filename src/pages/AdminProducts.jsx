@@ -26,7 +26,12 @@ function AdminProducts() {
       })
     });
 
-    const data = await res.json();
+    const data = await res.json().catch(() => null);
+
+    if(!res.ok){
+        showError(data?.message || "Something went wrong")
+        return
+    }
 
     if (res.ok) {
       alert("Product created successfully!");
