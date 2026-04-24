@@ -55,8 +55,10 @@ export function useCart(){
   }
 
   const removeFromCart = (id) => {
-    const updatedCart = cart.filter((item) => item.id !== id)
-    setCart(updatedCart)
+    //const updatedCart = cart.filter((item) => item.id !== id)
+    //setCart(updatedCart)
+    setCart([]);
+    localStorage.setItem("cart",JSON.stringify([]));
   }
 
   return {

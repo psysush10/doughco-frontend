@@ -60,7 +60,7 @@ function CartDrawer({isOpen, onClose}){
                 totalItems: payload.items.reduce((sum, i) => sum + i.quantity, 0)
             });
 
-            cart.forEach(item => removeFromCart(item.id));
+            removeFromCart();
             setTimeout(() => {
                 setOrderSuccess(null);
                 onClose();
