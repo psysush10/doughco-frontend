@@ -10,7 +10,9 @@ function AdminProducts() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products`, {
+    const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
+    const res = await fetch(`${API_BASE}/api/products`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

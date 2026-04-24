@@ -4,11 +4,12 @@ function Orders() {
     const [orders, setOrders] = useState([])
     const [loading, setLoading] = useState(true)
     const [expandedOrder, setExpandedOrder] = useState(null);
+    const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`)
+                const res = await fetch(`${API_BASE}/api/orders`)
                 const data = await res.json()
                 setOrders(data)
             } catch (err) {

@@ -12,10 +12,12 @@ function ProductDetail(){
     const [product, setProduct] = useState(null)
     const [loading, setLoading] = useState(true)
 
+    const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`)
+                const res = await fetch(`${API_BASE}/api/orders`)
 
                 if (!res.ok) {
                     throw new Error("Failed to fetch product")

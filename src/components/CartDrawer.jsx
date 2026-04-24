@@ -26,8 +26,9 @@ function CartDrawer({isOpen, onClose}){
                     quantity: item.quantity
                 }))
             };
+            const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
-            const res = await fetch('http://127.0.0.1:8000/api/orders', {
+            const res = await fetch(`${API_BASE}/api/orders`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

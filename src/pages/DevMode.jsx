@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 function DevMode() {
   const [orders, setOrders] = useState([]);
   const [products, setProducts] = useState([]);
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
     const fetchData = async () => {
-      const orderRes = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`);
+      const orderRes = await fetch(`${API_BASE}/api/orders`);
       const orderData = await orderRes.json();
 
-      const productRes = await fetch(`${import.meta.env.VITE_API_URL}/api/products`);
+      const productRes = await fetch(`${API_BASE}/api/products`);
       const productData = await productRes.json();
 
       setOrders(orderData);
