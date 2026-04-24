@@ -14,27 +14,21 @@ function Home() {
     const filteredCheapProducts = cheapItems.filter((p) => p.name.toLowerCase().includes(query.toLowerCase()))
     const filteredPremiumProducts = premiumItems.filter((p) => p.name.toLowerCase().includes(query.toLowerCase()))
 
-    console.log("API BASE:", import.meta.env.VITE_API_BASE_URL);
 
     const fetchProducts = async () => {
     setLoading(true)
     setError(null)
 
     try{
-        console.log("Calling Get Products API...")
         const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
         const res = await fetch(`${API_BASE}/api/products`)
-        
-        console.log("Response:", res)
         
         if(!res.ok){
             throw new Error("Failed to fetch products")
         }
 
         const data = await res.json()
-
-        console.log("Data:", data)
         
         setProducts(data)
     }catch(err){

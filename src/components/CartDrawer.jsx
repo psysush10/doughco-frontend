@@ -2,6 +2,7 @@ import { useCartContext } from "../context/CartContext"
 import { useState } from "react";
 function CartDrawer({isOpen, onClose}){
     const [orderSuccess, setOrderSuccess] = useState(null);
+    const [loading, setLoading] = useState(false);
     const {
   cart,
   increaseQuantity,
@@ -17,6 +18,7 @@ function CartDrawer({isOpen, onClose}){
     )
 
     const handleCheckout = async () => {
+        setLoading(true);
         const cartSnapshot = [...cart];
         setOrderSuccess(null);
         try {
@@ -38,11 +40,11 @@ function CartDrawer({isOpen, onClose}){
             });
 
             const data = await res.json().catch(() => null);
-            console.log("Order response:", data);
 
             // ❌ FAILURE PATH
             if (!res.ok || !data) {
                 alert(data?.message|| "Cart is empty");
+                setLoading(false);
                 return;
             }
 
@@ -59,12 +61,7 @@ function CartDrawer({isOpen, onClose}){
                 totalAmount: cartSnapshot.reduce((sum, i) => sum + (i.price * i.quantity), 0)
             });
 
-
-            console.log("ORDER SUMMARY:", {
-                orderId: data.orderId,
-                items: payload.items,
-                totalItems: payload.items.reduce((sum, i) => sum + i.quantity, 0)
-            });
+            setLoading(false);
 
             clearCart();
             setTimeout(() => {
@@ -74,7 +71,8 @@ function CartDrawer({isOpen, onClose}){
 
         } catch (err) {
             console.error(err);
-            alert("Checkout failed due to network/system error");
+            alert("Unable to place Order.Please try again");
+            setLoading(false);
         }
 };
 
@@ -155,8 +153,9 @@ function CartDrawer({isOpen, onClose}){
 
                 <button
                 onClick={handleCheckout}
+                disabled={loading}
                 className="mt-4 w-full bg-black text-white py-3 rounded-x1 cursor-pointer">
-                    Checkout
+                    {loading? "Processing..." :"Checkout"}
                 </button>
             </div>
         </div>

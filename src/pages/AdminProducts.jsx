@@ -6,8 +6,10 @@ function AdminProducts() {
   const [stock, setStock] = useState("");
   const [tag, setTag] = useState("");
   const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
 
     const API_BASE = import.meta.env.VITE_API_BASE_URL;
@@ -34,6 +36,7 @@ function AdminProducts() {
         } else {
             alert(data?.message || "Unable to add product. Please try again.");
         }
+        setLoading(false);
         return
     }
 
@@ -44,8 +47,10 @@ function AdminProducts() {
       setStock("")
       setTag("")
       setDescription("")
+      setLoading(false);
     } else {
       alert(data.message || "Error creating product");
+      setLoading(false);
     }
   };
 
@@ -96,8 +101,11 @@ function AdminProducts() {
           onChange={(e) => setTag(e.target.value)}
         />
 
-        <button className="bg-black text-white w-full py-2 rounded">
-          Create Product
+        <button 
+        className="bg-black text-white w-full py-2 rounded"
+        disabled={loading}
+        >
+          {loading? "Saving...." :"Add Product"}
         </button>
 
       </form>
