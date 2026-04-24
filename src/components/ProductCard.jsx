@@ -28,18 +28,42 @@ function ProductCard({item}) {
                 <p className="text-x1 font-bold mt-1 text-black">
                     ₹{item.price}
                 </p>
+                <p className={`text-xs font-semibold mt-1 ${
+                    item.stock === 0
+                        ? "text-red-600"
+                        : item.stock <= 5
+                        ? "text-orange-500"
+                        : "text-green-600"
+                    }`}>
+                    {item.stock === 0
+                        ? "Out of stock"
+                        : item.stock <= 5
+                        ? `Only ${item.stock} left 🔥`
+                        : `${item.stock} available`}
+                </p>
                 <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full mt-2 inline-block">
                     {item.tag}
                 </span>
-                <button 
+                <button
+                disabled={item.stock === 0} 
                 onClick={(e) => {
                     e.stopPropagation()
                     handleClick()
                 }}
-                className={`mt-4 w-full py-2 rounded-x1 text-sm transition-all duration-200 ${
-                    added ? "bg-green-500 text-white scale-105" : "bg-black text-white hover:bg-gray-800 hover:scale-105 active:scale-95"
+                className={`mt-4 w-full py-2 rounded-xl text-sm transition-all duration-200 ${
+                    item.stock === 0
+                        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                        : added
+                        ? "bg-green-500 text-white scale-105"
+                        : "bg-black text-white hover:bg-gray-800 hover:scale-105 active:scale-95"
                     }`}>
-                    {added ? "Added ✔" : "Add"}
+
+                    {item.stock === 0
+                    ? "Out of Stock"
+                    : added
+                    ? "Added ✔"
+                    : "Add"}
+                    
                 </button>
             </div>
         </div>

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-import { products as data } from "../data/products"
 import ProductCard from "../components/ProductCard"
 import { useCartContext } from "../context/CartContext"
 
@@ -15,24 +14,33 @@ function Home() {
     const filteredCheapProducts = cheapItems.filter((p) => p.name.toLowerCase().includes(query.toLowerCase()))
     const filteredPremiumProducts = premiumItems.filter((p) => p.name.toLowerCase().includes(query.toLowerCase()))
 
-    const fetchProducts = () => {
+    const fetchProducts = async () => {
     setLoading(true)
     setError(null)
 
-    const timer = setTimeout(() => {
-        // simulate failure randomly
-        const shouldFail = Math.random() < 0.3
-
-        if (shouldFail) {
-            setError("Failed to load products. Please try again.")
-            setLoading(false)
-            } else {
-            setProducts(data)
-            setLoading(false)
+    try{
+        console.log("Calling Get Products API...")
+        
+        const res = await fetch('`${import.meta.env.VITE_API_URL}/api/products`')
+        
+        console.log("Response:", res)
+        
+        if(!res.ok){
+            throw new Error("Failed to fetch products")
         }
-        }, 1000)
 
-        return () => clearTimeout(timer)
+        const data = await res.json()
+
+        console.log("Data:", data)
+        
+        setProducts(data)
+    }catch(err){
+        console.error(err)
+        setError("Failed to load products. Please try again")
+    } finally{
+        setLoading(false)
+    }
+
     }
     useEffect(() => {
         fetchProducts()

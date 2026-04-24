@@ -1,12 +1,76 @@
 import { useCartContext } from "../context/CartContext"
+import { useState } from "react";
 function CartDrawer({isOpen, onClose}){
+    const [orderSuccess, setOrderSuccess] = useState(null);
     const {
   cart,
   increaseQuantity,
   decreaseQuantity,
   removeFromCart
 } = useCartContext()
-    const total = cart.reduce((sum,item) => sum + item.price * item.quantity,0)
+    const displayCart = orderSuccess ? orderSuccess.items : cart;
+
+    const total = displayCart.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+    )
+
+    const handleCheckout = async () => {
+        const cartSnapshot = [...cart];
+        setOrderSuccess(null);
+        try {
+            const payload = {
+                customer_name: "Frontend User",
+                items: cart.map(item => ({
+                    product_id: item.id,
+                    quantity: item.quantity
+                }))
+            };
+
+            const res = await fetch('http://127.0.0.1:8000/api/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await res.json();
+            console.log("Order response:", data);
+
+            // ❌ FAILURE PATH
+            if (!res.ok || !data.success) {
+                alert(`Checkout Failed: ${data.message}`);
+                return;
+            }
+
+            // ✅ SUCCESS PATH
+            setOrderSuccess({
+                orderId: data.orderId,
+                items: cartSnapshot,
+                totalItems: cartSnapshot.reduce((sum, i) => sum + i.quantity, 0),
+                totalAmount: cartSnapshot.reduce((sum, i) => sum + (i.price * i.quantity), 0)
+            });
+
+
+            console.log("ORDER SUMMARY:", {
+                orderId: data.orderId,
+                items: payload.items,
+                totalItems: payload.items.reduce((sum, i) => sum + i.quantity, 0)
+            });
+
+            cart.forEach(item => removeFromCart(item.id));
+            setTimeout(() => {
+                setOrderSuccess(null);
+                onClose();
+            }, 3000);
+
+        } catch (err) {
+            console.error(err);
+            alert("Checkout failed due to network/system error");
+        }
+};
+
     if(!isOpen) return null
 
     return (
@@ -72,7 +136,18 @@ function CartDrawer({isOpen, onClose}){
                             <span>Total</span>
                             <span>₹{total}</span> 
                 </div>
+
+                {orderSuccess && (
+                    <div className="bg-green-100 border border-green-400 text-green-700 p-3 rounded mt-3">
+                        🎉 Order placed successfully! <br/>
+                        <strong>Order ID:</strong> {orderSuccess.orderId} <br/>
+                        <strong>Total Items:</strong> {orderSuccess.totalItems}
+                    </div>  
+                )}
+
+
                 <button
+                onClick={handleCheckout}
                 className="mt-4 w-full bg-black text-white py-3 rounded-x1">
                     Checkout
                 </button>

@@ -10,6 +10,12 @@ function Navbar({onCartClick}){
                 Dough Co. 🍪
             </h1>
 
+            {/* Cart History*/}
+            <a href="/orders" className="text-sm underline">
+                View Orders
+            </a>
+            
+
             {/* Cart Placeholder*/}
             <div 
             onClick={onCartClick}
