@@ -29,7 +29,11 @@ function AdminProducts() {
     const data = await res.json().catch(() => null);
 
     if(!res.ok){
-        alert(data?.message || "Something went wrong")
+        if (data?.errors) {
+            alert("Please fill all required fields");
+        } else {
+            alert(data?.message || "Unable to add product. Please try again.");
+        }
         return
     }
 
