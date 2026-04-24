@@ -58,7 +58,7 @@ function AdminProducts() {
     <div className="p-6 max-w-md mx-auto">
       <h1 className="text-xl font-bold mb-4">Admin - Add Product</h1>
       <div className="text-xs text-gray-400 mt-2">
-        API: Connected • Environment: Local • Orders: Transactional Mode
+        API: Connected • Orders: Transactional Mode
         </div>
 
       <form onSubmit={handleSubmit} className="space-y-3">

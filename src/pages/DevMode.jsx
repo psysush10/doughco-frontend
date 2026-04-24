@@ -34,7 +34,6 @@ function DevMode() {
       {/* SYSTEM STATUS */}
       <div className="border p-3 rounded mb-3">
         <p>API: Connected</p>
-        <p>Environment: Local</p>
       </div>
 
       {/* BUSINESS SNAPSHOT */}
