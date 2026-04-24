@@ -24,7 +24,7 @@ function DevMode() {
     return sum + Number(order.total_amount || 0);
   }, 0);
 
-  const lastOrder = orders[orders.length - 1];
+  const lastOrder = orders?.[0];
 
   return (
     <div className="p-6 max-w-lg mx-auto">
