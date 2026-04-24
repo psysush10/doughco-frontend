@@ -29,7 +29,7 @@ function AdminProducts() {
     const data = await res.json().catch(() => null);
 
     if(!res.ok){
-        showError(data?.message || "Something went wrong")
+        alert(data?.message || "Something went wrong")
         return
     }
 
