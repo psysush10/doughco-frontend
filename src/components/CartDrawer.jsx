@@ -36,12 +36,12 @@ function CartDrawer({isOpen, onClose}){
                 body: JSON.stringify(payload)
             });
 
-            const data = await res.json();
+            const data = await res.json().catch(() => null);
             console.log("Order response:", data);
 
             // ❌ FAILURE PATH
             if (!res.ok || !data.success) {
-                alert(`Checkout Failed: ${data.message}`);
+                alert(data?.message|| "Order failed");
                 return;
             }
 
@@ -149,7 +149,7 @@ function CartDrawer({isOpen, onClose}){
 
                 <button
                 onClick={handleCheckout}
-                className="mt-4 w-full bg-black text-white py-3 rounded-x1">
+                className="mt-4 w-full bg-black text-white py-3 rounded-x1 cursor-pointer">
                     Checkout
                 </button>
             </div>
