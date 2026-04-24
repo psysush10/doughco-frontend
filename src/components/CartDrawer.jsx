@@ -6,7 +6,8 @@ function CartDrawer({isOpen, onClose}){
   cart,
   increaseQuantity,
   decreaseQuantity,
-  removeFromCart
+  removeFromCart,
+  clearCart
 } = useCartContext()
     const displayCart = orderSuccess ? orderSuccess.items : cart;
 
@@ -40,8 +41,8 @@ function CartDrawer({isOpen, onClose}){
             console.log("Order response:", data);
 
             // ❌ FAILURE PATH
-            if (!res.ok || !data.success) {
-                alert(data?.message|| "Order failed");
+            if (!res.ok) {
+                alert(data?.message|| "Cart is empty");
                 return;
             }
 
@@ -60,7 +61,7 @@ function CartDrawer({isOpen, onClose}){
                 totalItems: payload.items.reduce((sum, i) => sum + i.quantity, 0)
             });
 
-            removeFromCart();
+            clearCart();
             setTimeout(() => {
                 setOrderSuccess(null);
                 onClose();
@@ -92,7 +93,7 @@ function CartDrawer({isOpen, onClose}){
                     <button onClick={onClose}>❌</button>
                 </div>
 
-                {cart.length === 0 ? (
+                {displayCart.length === 0 ? (
                     <div className="text-center mt-10">
                         <p className="text-gray-500">Your cart is empty</p>
                         <button
@@ -103,7 +104,7 @@ function CartDrawer({isOpen, onClose}){
                     </div>
                     ):(
                     <div className="space-y-4">
-                        {cart.map((item) => (
+                        {displayCart.map((item) => (
                             <div key={item.id} className="border-b pb-3" >
                                 <p className="font-semibold">{item.name}</p>
                                 <p className="text-xs text-gray-500">
