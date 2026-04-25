@@ -4,15 +4,15 @@ import { useCartContext } from "../context/CartContext"
 
 function ProductCard({item}) {
     const navigate = useNavigate()
-    const [added, setAdded] = useState(false)
+    const [justAdded, setJustAdded] = useState(false);
     const { cart, addToCart, increaseQuantity, decreaseQuantity } = useCartContext()
     const cartItem = cart.find(i => i.id === item.id && i.quantity > 0)
     const handleClick = () => {
         addToCart(item)
-        setAdded(true);
+        setJustAdded(true)
         setTimeout(() => {
-            setAdded(false)
-        },2000)
+            setJustAdded(true)
+        },1500)
         }
     return (
         <div onClick={() => navigate(`/product/${item.id}`)}
@@ -52,7 +52,14 @@ function ProductCard({item}) {
                     >
                         Out of Stock
                     </button>
-                    ) : cartItem ? (
+                    ) : justAdded? (
+                        <button
+                            className="mt-4 w-full py-2 rounded-xl text-sm bg-green-500 text-white scale-105"
+                        >
+                            Added to cart ✔
+                        </button>
+
+                    ) :cartItem ? (
                     <div className="mt-4 flex items-center justify-between gap-3">
                         <button
                         onClick={(e) => {
@@ -82,13 +89,9 @@ function ProductCard({item}) {
                         e.stopPropagation()
                         handleClick()
                         }}
-                        className={`mt-4 w-full py-2 rounded-xl text-sm transition-all duration-200 ${
-                        added
-                            ? "bg-green-500 text-white scale-105"
-                            : "bg-black text-white hover:bg-gray-800 hover:scale-105 active:scale-95"
-                        }`}
+                        className={`mt-4 w-full py-2 rounded-xl text-sm transition-all duration-200 `}
                     >
-                        {added ? "Added to cart ✔" : "Add"}
+                        Add
                     </button>
                 )}
             </div>
