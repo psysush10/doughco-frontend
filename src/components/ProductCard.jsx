@@ -89,7 +89,7 @@ function ProductCard({item}) {
                         e.stopPropagation()
                         handleClick()
                         }}
-                        className={`mt-4 w-full py-2 rounded-xl text-sm transition-all duration-200 `}
+                        className={`mt-4 w-full py-2 rounded-xl text-sm bg-black text-white hover:bg-gray-800 hover:scale-105 active:scale-95 transition-all duration-200`}
                     >
                         Add
                     </button>
