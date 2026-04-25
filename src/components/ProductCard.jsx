@@ -5,13 +5,14 @@ import { useCartContext } from "../context/CartContext"
 function ProductCard({item}) {
     const navigate = useNavigate()
     const [added, setAdded] = useState(false)
-    const { addToCart } = useCartContext()
+    const { cart, addToCart, increaseQuantity, decreaseQuantity } = useCartContext()
+    const cartItem = cart.find(i => i.id === item.id && i.quantity > 0)
     const handleClick = () => {
         addToCart(item)
         setAdded(true);
         setTimeout(() => {
             setAdded(false)
-        },1000)
+        },2000)
         }
     return (
         <div onClick={() => navigate(`/product/${item.id}`)}
@@ -44,27 +45,52 @@ function ProductCard({item}) {
                 <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full mt-2 inline-block">
                     {item.tag}
                 </span>
-                <button
-                disabled={item.stock === 0} 
-                onClick={(e) => {
-                    e.stopPropagation()
-                    handleClick()
-                }}
-                className={`mt-4 w-full py-2 rounded-xl text-sm transition-all duration-200 ${
-                    item.stock === 0
-                        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                        : added
-                        ? "bg-green-500 text-white scale-105"
-                        : "bg-black text-white hover:bg-gray-800 hover:scale-105 active:scale-95"
-                    }`}>
+                {item.stock === 0 ? (
+                    <button
+                        disabled
+                        className="mt-4 w-full py-2 rounded-xl text-sm bg-gray-300 text-gray-500"
+                    >
+                        Out of Stock
+                    </button>
+                    ) : cartItem ? (
+                    <div className="mt-4 flex items-center justify-between gap-3">
+                        <button
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            decreaseQuantity(item.id)
+                        }}
+                        className="px-3 py-1 bg-gray-200 rounded"
+                        >
+                        -
+                        </button>
 
-                    {item.stock === 0
-                    ? "Out of Stock"
-                    : added
-                    ? "Added ✔"
-                    : "Add"}
-                    
-                </button>
+                        <span className="font-semibold">{cartItem.quantity}</span>
+
+                        <button
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            increaseQuantity(item.id)
+                        }}
+                        className="px-3 py-1 bg-gray-200 rounded"
+                        >
+                        +
+                        </button>
+                    </div>
+                    ) : (
+                    <button
+                        onClick={(e) => {
+                        e.stopPropagation()
+                        handleClick()
+                        }}
+                        className={`mt-4 w-full py-2 rounded-xl text-sm transition-all duration-200 ${
+                        added
+                            ? "bg-green-500 text-white scale-105"
+                            : "bg-black text-white hover:bg-gray-800 hover:scale-105 active:scale-95"
+                        }`}
+                    >
+                        {added ? "Added to cart ✔" : "Add"}
+                    </button>
+                )}
             </div>
         </div>
     )
