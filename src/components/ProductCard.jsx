@@ -11,7 +11,7 @@ function ProductCard({item}) {
         addToCart(item)
         setJustAdded(true)
         setTimeout(() => {
-            setJustAdded(true)
+            setJustAdded(false)
         },1500)
         }
     return (
@@ -52,14 +52,14 @@ function ProductCard({item}) {
                     >
                         Out of Stock
                     </button>
-                    ) : justAdded? (
+                    ) : justAdded ? (
                         <button
                             className="mt-4 w-full py-2 rounded-xl text-sm bg-green-500 text-white scale-105"
                         >
                             Added to cart ✔
                         </button>
 
-                    ) :cartItem ? (
+                    ) : cartItem ? (
                     <div className="mt-4 flex items-center justify-between gap-3">
                         <button
                         onClick={(e) => {
