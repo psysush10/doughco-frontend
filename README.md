@@ -5,6 +5,7 @@ A production-style e-commerce application built using React and Laravel, demonst
 ---
 ## 🚀 Live Demo
 App: https://doughco-frontend.vercel.app/
+
 Demo Video: https://www.loom.com/share/c55ec759e2c44e4da1f7d75c4c950204
 
 ---
