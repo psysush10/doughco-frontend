@@ -1,38 +1,29 @@
-# DoughCo Frontend 🍪
+# DoughCo – Full Stack E-commerce Application 🍪
 
-A product-focused React application simulating an online cookie dough store, built to demonstrate modern frontend architecture, state management, and user-centric design.
+A production-style e-commerce application built using React and Laravel, demonstrating real-world frontend flows, API integration, and state management.
+
+---
+## 🚀 Live Demo
+App: https://doughco-frontend.vercel.app/
+Demo Video: https://www.loom.com/share/c55ec759e2c44e4da1f7d75c4c950204
 
 ---
 
 ## 🚀 Features
 
-* 🛒 Add to Cart with quantity management
-* 🌐 Global state management using Context API
-* 💾 Cart persistence using localStorage
-* 🔍 Real-time search & filtering
-* ⚡ Async data loading simulation
-* ❌ Error handling with retry mechanism
-* 🎨 Smooth UI interactions & micro-animations
+* Dynamic product listing using API data
+* Cart management with state handling
+* Checkout flow integration
+* API-driven architecture with backend abstraction
 
 ---
 
-## 🧠 Tech & Concepts Used
+## 🧠 Tech Stack
 
-* React (Functional Components, Hooks)
-* Context API (Global State Management)
-* Custom Hooks (`useCart`)
-* React Router (Dynamic Routing)
-* Tailwind CSS (Styling & UI)
-* LocalStorage (State Persistence)
-
----
-
-## 🏗️ Architecture
-
-* `useCart` → Handles business logic (cart operations)
-* `CartContext` → Distributes global state
-* Components → UI rendering
-* Pages → Route-based structure
+* Frontend: React, JavaScript, HTML, Tailwind CSS
+* Backend: Laravel (PHP)
+* Integration: Shopify APIs
+* Deployment: Vercel (frontend), Railway (backend)
 
 ---
 
@@ -46,12 +37,12 @@ A product-focused React application simulating an online cookie dough store, bui
 
 ---
 
-## ⚙️ Key Engineering Decisions
+## 💡 What this project demonstrates
 
-* Used Context API to avoid prop drilling and scale state management
-* Extracted cart logic into a reusable custom hook
-* Implemented loading, error, and retry states for realistic async behavior
-* Focused on clean component architecture and separation of concerns
+* Building real-world frontend flows (product → cart → checkout)
+* Integrating third-party APIs (Shopify)
+* Managing application state effectively
+* Structuring a full-stack application
 
 ---
 
