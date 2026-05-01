@@ -19,6 +19,14 @@ Demo Video: https://www.loom.com/share/c55ec759e2c44e4da1f7d75c4c950204
 
 ---
 
+## 🔗 Backend Repository
+
+The backend for this application is built using Laravel and handles API logic and integrations.
+
+👉 Backend Repo: https://github.com/psysush10/doughco-api
+
+---
+
 ## 🧠 Tech Stack
 
 * Frontend: React, JavaScript, HTML, Tailwind CSS
